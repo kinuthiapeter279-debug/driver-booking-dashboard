@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f5f7f6">
+    <meta name="description" content="Your driver dashboard for bookings, earnings, and today's schedule.">
+    <title>Dashboard · Driveflow</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></symbol>
+        <symbol id="i-car" viewBox="0 0 24 24"><path d="m5 11 1.6-4.1A2 2 0 0 1 8.5 5.5h7a2 2 0 0 1 1.9 1.4L19 11"/><path d="M3.5 11h17v7h-17zM6 18v1.5m12-1.5v1.5M4 14h2m12 0h2"/><circle cx="7.5" cy="14.5" r=".5"/><circle cx="16.5" cy="14.5" r=".5"/></symbol>
+        <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M4 6.5h14a2 2 0 0 1 2 2v10H5a2 2 0 0 1-2-2v-12a2 2 0 0 1 2-2h13v4"/><path d="M20 11h-5a2 2 0 0 0 0 4h5z"/><path d="M15.5 13h.01"/></symbol>
+        <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+        <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9z"/></symbol>
+        <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9m-8 12h4"/></symbol>
+        <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></symbol>
+        <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="m7 14 5-5 5 5M12 9v11"/></symbol>
+        <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+        <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+        <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2m6-10a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm6-7.8a4 4 0 0 1 0 7.6m6 10v-2a4 4 0 0 0-3-3.9"/></symbol>
+        <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></symbol>
+        <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></symbol>
+        <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.6 9a2.5 2.5 0 1 1 4.3 1.7c-1.1 1.1-1.9 1.4-1.9 3m0 3h.01"/></symbol>
+        <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1a1.7 1.7 0 1 1-2.4 2.4l-.1-.1a1.7 1.7 0 0 0-2.9 1.2v.2a1.7 1.7 0 1 1-3.4 0v-.2a1.7 1.7 0 0 0-2.9-1.2l-.1.1a1.7 1.7 0 1 1-2.4-2.4l.1-.1a1.7 1.7 0 0 0-1.2-2.9H4a1.7 1.7 0 1 1 0-3.4h.2a1.7 1.7 0 0 0 1.2-2.9l-.1-.1a1.7 1.7 0 1 1 2.4-2.4l.1.1a1.7 1.7 0 0 0 2.9-1.2V4a1.7 1.7 0 1 1 3.4 0v.2a1.7 1.7 0 0 0 2.9 1.2l.1-.1a1.7 1.7 0 1 1 2.4 2.4l-.1.1a1.7 1.7 0 0 0 1.2 2.9h.2a1.7 1.7 0 1 1 0 3.4h-.2a1.7 1.7 0 0 0-1.2.9Z"/></symbol>
+        <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    </svg>
+
+    <div class="app-shell">
+        <aside class="sidebar" aria-label="Main navigation">
+            <a class="brand" href="#" aria-label="Driveflow home">
+                <span class="brand-mark"><svg><use href="#i-car"/></svg></span>
+                <span>drive<span class="brand-light">flow</span></span>
+            </a>
+
+            <div class="nav-label">WORKSPACE</div>
+            <nav class="primary-nav">
+                <a class="nav-item active" href="#overview" aria-current="page"><svg><use href="#i-grid"/></svg><span>Overview</span></a>
+                <a class="nav-item" href="#requests"><svg><use href="#i-car"/></svg><span>Ride requests</span><span class="nav-count">3</span></a>
+                <a class="nav-item" href="#schedule"><svg><use href="#i-calendar"/></svg><span>My schedule</span></a>
+                <a class="nav-item" href="#earnings"><svg><use href="#i-wallet"/></svg><span>Earnings</span></a>
+                <a class="nav-item" href="#activity"><svg><use href="#i-clock"/></svg><span>Trip history</span></a>
+                <a class="nav-item role-switch" href="client-dashboard.html"><svg><use href="#i-car"/></svg><span>Client dashboard</span></a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="nav-label">PREFERENCES</div>
+                <a class="nav-item" href="#settings"><svg><use href="#i-settings"/></svg><span>Settings</span></a>
+                <a class="nav-item" href="#help"><svg><use href="#i-help"/></svg><span>Help & support</span></a>
+                <div class="sidebar-divider"></div>
+                <div class="profile-mini">
+                    <div class="avatar">PK<span class="avatar-online"></span></div>
+                    <div class="profile-copy"><strong>Peter Kinuthia</strong><span>Pro driver</span></div>
+                    <button class="icon-button profile-more" aria-label="Profile options"><svg><use href="#i-more"/></svg></button>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content" id="overview">
+            <header class="topbar">
+                <div class="breadcrumb"><span>Workspace</span><svg><use href="#i-chevron"/></svg><strong>Overview</strong></div>
+                <div class="topbar-actions">
+                    <label class="search-box">
+                        <svg><use href="#i-search"/></svg>
+                        <input id="dashboard-search" type="search" placeholder="Search anything..." aria-label="Search ride requests">
+                        <kbd>⌘ K</kbd>
+                    </label>
+                    <div class="notification-wrap">
+                        <button class="icon-button notification-button" id="notification-button" aria-label="Notifications" aria-expanded="false">
+                            <svg><use href="#i-bell"/></svg><span class="notification-dot"></span>
+                        </button>
+                        <div class="notification-popover" id="notification-popover" hidden>
+                            <strong>You're all caught up</strong>
+                            <span>New ride requests will appear here.</span>
+                        </div>
+                    </div>
+                    <span class="topbar-divider"></span>
+                    <div class="topbar-user"><div class="avatar avatar-small">PK</div><span>Peter</span></div>
+                </div>
+            </header>
+
+            <div class="page-wrap">
+                <section class="welcome-row">
+                    <div>
+                        <div class="eyebrow"><span class="eyebrow-dot"></span> SUNDAY, NOVEMBER 15, 2026</div>
+                        <h1>Good evening, Peter <span class="wave">✦</span></h1>
+                        <p class="welcome-subtitle">Here’s what’s happening with your driving today.</p>
+                    </div>
+                    <button class="availability-button is-online" id="availability-button" aria-pressed="true">
+                        <span class="availability-dot"></span><span class="availability-label">You're online</span><span class="toggle-track"><span></span></span>
+                    </button>
+                </section>
+
+                <section class="stats-grid" aria-label="Today's performance">
+                    <article class="stat-card">
+                        <div class="stat-top"><span class="stat-icon mint"><svg><use href="#i-wallet"/></svg></span><span class="stat-trend"><svg><use href="#i-arrow-up"/></svg> 12.8%</span></div>
+                        <div class="stat-label">Today's earnings</div>
+                        <div class="stat-value">KSh 8,450<span class="stat-period">.00</span></div>
+                        <div class="stat-foot">vs. KSh 7,490 yesterday</div>
+                    </article>
+                    <article class="stat-card">
+                        <div class="stat-top"><span class="stat-icon lavender"><svg><use href="#i-car"/></svg></span><span class="stat-note">On track</span></div>
+                        <div class="stat-label">Completed trips</div>
+                        <div class="stat-value">12<span class="stat-unit"> rides</span></div>
+                        <div class="stat-foot">Your daily goal is 15 trips</div>
+                        <div class="goal-track"><span></span></div>
+                    </article>
+                    <article class="stat-card">
+                        <div class="stat-top"><span class="stat-icon amber"><svg><use href="#i-star"/></svg></span><span class="stat-note">Top 5%</span></div>
+                        <div class="stat-label">Driver rating</div>
+                        <div class="stat-value">4.98<span class="stat-unit"> / 5.0</span></div>
+                        <div class="stat-foot">From 248 passenger reviews</div>
+                    </article>
+                    <article class="stat-card">
+                        <div class="stat-top"><span class="stat-icon blue"><svg><use href="#i-clock"/></svg></span><span class="stat-note">Today</span></div>
+                        <div class="stat-label">Time online</div>
+                        <div class="stat-value">6<span class="stat-unit">h</span> 42<span class="stat-unit">m</span></div>
+                        <div class="stat-foot">You’re doing great — keep it up</div>
+                    </article>
+                </section>
+
+                <section class="promo-card" aria-label="Driver tip">
+                    <div class="promo-content">
+                        <div class="promo-kicker"><span></span> DRIVER SPOTLIGHT</div>
+                        <h2>Every great journey<br>starts with a hello.</h2>
+                        <p>A warm greeting can turn a good ride into a 5-star experience. You’ve got this.</p>
+                        <a class="promo-link" href="#requests">Explore ride requests <svg><use href="#i-arrow-right"/></svg></a>
+                    </div>
+                    <div class="promo-image" role="img" aria-label="A car ready for the road"></div>
+                    <div class="promo-badge"><span class="badge-star">★</span><span><strong>4.98</strong><small>your rating</small></span></div>
+                </section>
+
+                <div class="content-grid">
+                    <section class="panel requests-panel" id="requests">
+                        <div class="panel-heading">
+                            <div><div class="section-kicker">READY WHEN YOU ARE</div><h2>New ride requests <span class="request-count">3</span></h2></div>
+                            <button class="text-button" id="refresh-requests">View all <svg><use href="#i-arrow-right"/></svg></button>
+                        </div>
+                        <div class="request-tabs" role="tablist" aria-label="Filter ride requests">
+                            <button class="request-tab active" role="tab" aria-selected="true" data-filter="all">All requests <span>3</span></button>
+                            <button class="request-tab" role="tab" aria-selected="false" data-filter="nearby">Nearby</button>
+                            <button class="request-tab" role="tab" aria-selected="false" data-filter="scheduled">Scheduled</button>
+                        </div>
+
+                        <div class="request-list">
+                            <article class="request-card" data-type="nearby" data-search="aisha kamau westlands jkia airport">
+                                <div class="request-main">
+                                    <div class="rider-avatar rider-one">AK</div>
+                                    <div class="rider-info"><strong>Aisha Kamau <span class="verified">✓</span></strong><span><svg><use href="#i-star"/></svg> 4.9 <i></i> 18 trips</span></div>
+                                    <div class="request-price"><strong>KSh 1,850</strong><span>12.4 km</span></div>
+                                </div>
+                                <div class="route-row">
+                                    <div class="route-stops"><span class="route-origin"></span><span class="route-line"></span><span class="route-destination"></span></div>
+                                    <div class="route-copy"><div><span>Westlands, Nairobi</span><small>Pickup · 4 min away</small></div><div><span>Jomo Kenyatta Airport</span><small>Drop-off · Approx. 28 min</small></div></div>
+                                </div>
+                                <div class="request-footer"><span class="ride-tag"><svg><use href="#i-users"/></svg> 1 passenger</span><span class="ride-tag">Today, 7:15 PM</span><button class="accept-button">Accept ride</button></div>
+                            </article>
+                            <article class="request-card" data-type="nearby" data-search="brian otieno kilimani upperhill">
+                                <div class="request-main">
+                                    <div class="rider-avatar rider-two">BO</div>
+                                    <div class="rider-info"><strong>Brian Otieno <span class="verified">✓</span></strong><span><svg><use href="#i-star"/></svg> 5.0 <i></i> 42 trips</span></div>
+                                    <div class="request-price"><strong>KSh 920</strong><span>6.8 km</span></div>
+                                </div>
+                                <div class="route-row">
+                                    <div class="route-stops"><span class="route-origin"></span><span class="route-line"></span><span class="route-destination"></span></div>
+                                    <div class="route-copy"><div><span>Kilimani, Nairobi</span><small>Pickup · 7 min away</small></div><div><span>Upper Hill, Nairobi</span><small>Drop-off · Approx. 16 min</small></div></div>
+                                </div>
+                                <div class="request-footer"><span class="ride-tag"><svg><use href="#i-users"/></svg> 2 passengers</span><span class="ride-tag">Today, 7:30 PM</span><button class="accept-button">Accept ride</button></div>
+                            </article>
+                            <article class="request-card" data-type="scheduled" data-search="grace wanjiku karen lavington">
+                                <div class="request-main">
+                                    <div class="rider-avatar rider-three">GW</div>
+                                    <div class="rider-info"><strong>Grace Wanjiku <span class="verified">✓</span></strong><span><svg><use href="#i-star"/></svg> 4.8 <i></i> 9 trips</span></div>
+                                    <div class="request-price"><strong>KSh 1,240</strong><span>8.2 km</span></div>
+                                </div>
+                                <div class="route-row">
+                                    <div class="route-stops"><span class="route-origin"></span><span class="route-line"></span><span class="route-destination"></span></div>
+                                    <div class="route-copy"><div><span>Karen, Nairobi</span><small>Pickup · Scheduled</small></div><div><span>Lavington, Nairobi</span><small>Drop-off · Approx. 22 min</small></div></div>
+                                </div>
+                                <div class="request-footer"><span class="ride-tag"><svg><use href="#i-users"/></svg> 1 passenger</span><span class="ride-tag">Today, 8:00 PM</span><button class="accept-button">Accept ride</button></div>
+                            </article>
+                            <div class="empty-state" id="empty-state" hidden>No requests match your search.</div>
+                        </div>
+                    </section>
+
+                    <div class="right-column">
+                        <section class="panel schedule-panel" id="schedule">
+                            <div class="panel-heading schedule-heading">
+                                <div><div class="section-kicker">YOUR DAY AT A GLANCE</div><h2>Upcoming schedule</h2></div>
+                                <button class="icon-button subtle-button" aria-label="Schedule options"><svg><use href="#i-more"/></svg></button>
+                            </div>
+                            <div class="schedule-date"><span class="date-number">15</span><span><strong>Sunday</strong><small>November 2026</small></span><span class="schedule-today">TODAY</span></div>
+                            <div class="timeline">
+                                <div class="timeline-entry past"><span class="timeline-time">5:30 PM</span><span class="timeline-marker"></span><div class="timeline-detail"><strong>Trip completed</strong><span>Parklands → Westlands</span></div><span class="timeline-status">Done</span></div>
+                                <div class="timeline-entry current"><span class="timeline-time">7:15 PM</span><span class="timeline-marker"></span><div class="timeline-detail"><strong>Airport drop-off</strong><span>Westlands → JKIA</span></div><span class="timeline-status">Next</span></div>
+                                <div class="timeline-entry"><span class="timeline-time">8:00 PM</span><span class="timeline-marker"></span><div class="timeline-detail"><strong>Passenger pickup</strong><span>Karen → Lavington</span></div></div>
+                            </div>
+                            <a class="schedule-link" href="#schedule">Open full schedule <svg><use href="#i-arrow-right"/></svg></a>
+                        </section>
+
+                        <section class="earning-card" id="earnings">
+                            <div class="earning-top"><div><div class="section-kicker">WEEKLY OVERVIEW</div><h2>Your earnings</h2></div><button class="period-button">This week <span>⌄</span></button></div>
+                            <div class="earning-total">KSh 42,680 <span class="earning-change"><svg><use href="#i-arrow-up"/></svg> 8.2%</span></div>
+                            <div class="earning-caption">You earned KSh 3,240 more than last week</div>
+                            <div class="chart-wrap" role="img" aria-label="Weekly earnings chart, highest on Saturday">
+                                <div class="chart-y-labels"><span>12k</span><span>8k</span><span>4k</span><span>0</span></div>
+                                <svg class="earnings-chart" viewBox="0 0 330 112" preserveAspectRatio="none" aria-hidden="true">
+                                    <defs><linearGradient id="chart-fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#4c9f7a" stop-opacity=".2"/><stop offset="100%" stop-color="#4c9f7a" stop-opacity="0"/></linearGradient></defs>
+                                    <path class="chart-gridline" d="M0 10H330M0 39H330M0 68H330M0 97H330"/>
+                                    <path class="chart-area" d="M0 72 C18 68 27 61 47 64 S75 78 94 60 S120 48 141 56 S167 68 188 42 S215 34 235 44 S258 53 282 23 S309 30 330 9 V97 H0Z"/>
+                                    <path class="chart-line" d="M0 72 C18 68 27 61 47 64 S75 78 94 60 S120 48 141 56 S167 68 188 42 S215 34 235 44 S258 53 282 23 S309 30 330 9"/>
+                                    <circle class="chart-point" cx="330" cy="9" r="4"/>
+                                </svg>
+                            </div>
+                            <div class="chart-days"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+                        </section>
+                    </div>
+                </div>
+
+                <footer class="page-footer"><span>© 2026 Driveflow</span><span>Drive safe. Drive happy. <span class="footer-heart">♥</span></span></footer>
+            </div>
+        </main>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script>
+        const requestCards = [...document.querySelectorAll(".request-card")];
+        const emptyState = document.getElementById("empty-state");
+        const searchInput = document.getElementById("dashboard-search");
+        let activeFilter = "all";
+
+        function filterRequests() {
+            const query = searchInput.value.trim().toLowerCase();
+            let visible = 0;
+            requestCards.forEach((card) => {
+                const matchesFilter = activeFilter === "all" || card.dataset.type === activeFilter;
+                const matchesSearch = card.dataset.search.includes(query);
+                card.hidden = !(matchesFilter && matchesSearch);
+                if (!card.hidden) visible += 1;
+            });
+            emptyState.hidden = visible > 0;
+        }
+
+        document.querySelectorAll(".request-tab").forEach((tab) => {
+            tab.addEventListener("click", () => {
+                const currentTab = document.querySelector(".request-tab.active");
+                currentTab.classList.remove("active");
+                currentTab.setAttribute("aria-selected", "false");
+                tab.classList.add("active");
+                tab.setAttribute("aria-selected", "true");
+                activeFilter = tab.dataset.filter;
+                filterRequests();
+            });
+        });
+
+        searchInput.addEventListener("input", filterRequests);
+        document.querySelector(".search-box").addEventListener("click", (event) => {
+            if (window.matchMedia("(max-width: 640px)").matches && event.target !== searchInput) {
+                event.preventDefault();
+                event.currentTarget.classList.add("mobile-open");
+                searchInput.focus();
+            }
+        });
+        searchInput.addEventListener("blur", () => {
+            if (!searchInput.value) document.querySelector(".search-box").classList.remove("mobile-open");
+        });
+
+        let toastTimer;
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.textContent = message;
+            toast.classList.add("show");
+            window.clearTimeout(toastTimer);
+            toastTimer = window.setTimeout(() => toast.classList.remove("show"), 2800);
+        }
+
+        document.querySelectorAll(".accept-button").forEach((button) => {
+            button.addEventListener("click", () => {
+                const card = button.closest(".request-card");
+                const rider = card.querySelector(".rider-info strong").textContent.trim();
+                button.textContent = "Ride accepted";
+                button.disabled = true;
+                button.classList.add("accepted");
+                card.classList.add("is-accepted");
+                showToast(`Ride with ${rider} accepted`);
+            });
+        });
+
+        const availabilityButton = document.getElementById("availability-button");
+        availabilityButton.addEventListener("click", () => {
+            const isOnline = availabilityButton.classList.toggle("is-online");
+            availabilityButton.setAttribute("aria-pressed", String(isOnline));
+            availabilityButton.querySelector(".availability-label").textContent = isOnline ? "You're online" : "You're offline";
+            showToast(isOnline ? "You’re now visible for ride requests" : "You’re no longer receiving requests");
+        });
+
+        const notificationButton = document.getElementById("notification-button");
+        const notificationPopover = document.getElementById("notification-popover");
+        notificationButton.addEventListener("click", () => {
+            const isOpen = notificationPopover.hidden;
+            notificationPopover.hidden = !isOpen;
+            notificationButton.setAttribute("aria-expanded", String(isOpen));
+        });
+        document.addEventListener("click", (event) => {
+            if (!event.target.closest(".notification-wrap")) {
+                notificationPopover.hidden = true;
+                notificationButton.setAttribute("aria-expanded", "false");
+            }
+        });
+
+        document.getElementById("refresh-requests").addEventListener("click", () => {
+            document.querySelector('[data-filter="all"]').click();
+            searchInput.value = "";
+            filterRequests();
+            showToast("Showing all available ride requests");
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+                event.preventDefault();
+                searchInput.focus();
+            }
+            if (event.key === "Escape") {
+                notificationPopover.hidden = true;
+                notificationButton.setAttribute("aria-expanded", "false");
+                searchInput.blur();
+            }
+        });
+    </script>
+</body>
+</html>
